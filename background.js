@@ -10,11 +10,44 @@ function copyToClipboard(text) {
     document.body.removeChild(copyDiv);
 }
 
+var ctx1 = chrome.contextMenus.create({
+    title: '复制标题格式1',
+    type: 'normal',
+    onclick: function() {
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                action: 'doCopy1'
+            }, function(response) {
+
+            });
+        });
+
+    }
+});
+
+var ctx2 = chrome.contextMenus.create({
+    title: '复制标题格式2',
+    type: 'normal',
+    onclick: function() {
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                action: 'doCopy2'
+            }, function(response) {
+
+            });
+        });
+    }
+});
 
 
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 
-    console.log(request);
     if (request.action === 'copytoclipboard') {
         copyToClipboard(request.content);
         sendResponse({

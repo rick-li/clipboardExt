@@ -1,13 +1,14 @@
 {
     "manifest_version": 2,
 
-    "name": "copy title & url",
+    "name": "复制标题链接",
     "description": "Copy title & url in current page",
     "version": "1.0",
 
     "permissions": [
         "<all_urls>",
         "background",
+        "contextMenus",
         "clipboardRead",
         "clipboardWrite"
     ],

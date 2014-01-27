@@ -1,30 +1,40 @@
 + function() {
     window.onload = function(argument) {
 
-        var btn1 = document.createElement('button');
-        btn1.innerText = "复制格式1"
-        btn1.style.position = "fixed";
-        btn1.style.top = '5px';
-        btn1.style.right = '10px';
-        btn1.style.zIndex = 9999;
-        btn1.id = 'btn1';
-        var btn2 = document.createElement('button');
-        btn2.innerText = "复制格式2"
-        btn2.style.position = "fixed";
-        btn2.style.top = '30px';
-        btn2.style.right = '10px';
-        btn2.style.zIndex = 9999;
-        btn2.id = 'btn2';
-        document.body.appendChild(btn1);
-        document.body.appendChild(btn2);
+        // var btn1 = document.createElement('button');
+        // btn1.innerText = "复制格式1"
+        // btn1.style.position = "fixed";
+        // btn1.style.top = '5px';
+        // btn1.style.right = '10px';
+        // btn1.style.zIndex = 9999;
+        // btn1.id = 'btn1';
+        // var btn2 = document.createElement('button');
+        // btn2.innerText = "复制格式2"
+        // btn2.style.position = "fixed";
+        // btn2.style.top = '30px';
+        // btn2.style.right = '10px';
+        // btn2.style.zIndex = 9999;
+        // btn2.id = 'btn2';
+        // document.body.appendChild(btn1);
+        // document.body.appendChild(btn2);
 
 
-        btn1.addEventListener('click', function() {
-            copy(document.title + '\n' + location.href);
-        });
-        btn2.addEventListener('click', function() {
-            copy('[URL=' + location.href + ']' + document.title + '[/URL]');
-            // copy(document.title + '\n' + location.href
+
+
+        // btn1.addEventListener('click', function() {
+        //     copy(document.title + '\n' + location.href);
+        // });
+        // btn2.addEventListener('click', function() {
+        //     copy('[URL=' + location.href + ']' + document.title + '[/URL]');
+        //     // copy(document.title + '\n' + location.href
+        // });
+        chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+            if (request.action === 'doCopy1') {
+                copy(document.title + '\n' + location.href);
+            }
+            if (request.action === 'doCopy2') {
+                copy('[URL=' + location.href + ']' + document.title + '[/URL]');
+            }
         });
 
         function copy(text) {
